@@ -123,7 +123,7 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/links/"/>
+    <link rel="canonical" href="http://example.com/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
@@ -140,7 +140,7 @@
     
     <title>
         
-            友链 | yfor的小pwn窝
+            yfor的小pwn窝 - Redefine Your Hexo Journey.
         
     </title>
 
@@ -375,17 +375,111 @@
 <main class="page-container" id="swup">
 
 	
+	
+    <style>
+        .home-banner-container {
+            background: none !important;
+        }
+        .home-article-item,
+        .sidebar-links,
+        .sidebar-content,
+        a.page-number,
+        a.extend,
+        .sidebar-links .links:hover,
+        .right-bottom-tools,
+        footer.footer {
+            background-color: var(--background-color-transparent-80) !important;
+        }
+        .right-bottom-tools:hover,
+        a.page-number:hover,
+        a.extend:hover {
+            background-color: var(--primary-color) !important;
+        }
+        .site-info,
+        .home-article-sticky-label {
+            background-color: var(--background-color-transparent-15) !important;
+        }
+        .home-article-sticky-label {
+            backdrop-filter: none !important;
+        }
+    </style>
+    <div class="home-banner-background transition-fade fixed top-0 left-0 w-screen h-screen scale-125 sm:scale-110 box-border will-change-transform bg-cover">
+        <img src="/images/background.jpg#%20light%20mode" alt="home-banner-background" class="w-full h-full object-cover dark:hidden">
+        <img src="/images/background.jpg" alt="home-banner-background" class="w-full h-full object-cover hidden dark:block">
+    </div>
+
+
+<div class="home-banner-container flex justify-center items-center transition-fade relative">
+    
+    <div class="content mt-8 flex flex-col justify-center items-center transition-fade-down">
+        <div class="description flex flex-col justify-center items-center w-screen font-medium text-center"
+        
+        >
+            yfor's blog
+            
+            
+                <p><i id="subtitle"></i></p>
+            
+        </div>
+        
+            
+            <div class="absolute bottom-0.5 flex flex-row justify-center max-w-[1340px] items-center w-full px-8 sm:px-12">
+                <div class="hidden p-3 bg-gray-300/50 dark:bg-gray-500/40 backdrop-blur-lg border border-white/20 dark:border-gray-500/30 group rounded-full cursor-pointer flex justify-center items-center aspect-square h-full shadow-redefine-flat hover:shadow-redefine-flat-hover transition-shadow" onclick="scrollToMain()" >
+                    <i class="fa-solid fa-arrow-down fa-fw fa-lg group-hover:translate-y-1 transition-transform"></i>
+                </div>
+                <div class="social-contacts px-6 py-3 bg-gray-300/50 dark:bg-gray-500/40 backdrop-blur-lg border border-white/20 dark:border-gray-500/30 shadow-redefine-flat rounded-full flex flex-row gap-3 items-center">
+                    
+                        
+                            
+                                <span class="social-contact-item github">
+                                    <a target="_blank" href="https://github.com/yfor-yfor/">
+                                        <i class="fa-brands fa-fw fa-lg fa-github"></i>
+                                    </a>
+                                </span>
+                            
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                                <span class="social-contact-item email ">
+                                    <a href="mailto:2289014121@qq.com">
+                                        <i class="fa-solid fa-fw fa-at fa-lg"></i>
+                                    </a>
+                                </span>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+        
+    </div>
+    <script>
+        const scrollToMain = ()=> {
+            console.log('scroll');
+            const target = document.querySelector('.main-content-container');
+            target.scrollIntoView({ behavior: 'smooth'});
+        }
+    </script>
+</div>
+	
 
 	<div class="main-content-container flex flex-col justify-between min-h-dvh">
 		<div class="main-content-header">
 			<header class="navbar-container px-6 md:px-12">
-    <div class="navbar-content transition-navbar ">
+    <div class="navbar-content transition-navbar has-home-banner">
         <div class="left">
             
             <a class="logo-title" href="/">
-                
+                <h1>
                 yfor的小pwn窝
-                
+                </h1>
             </a>
         </div>
 
@@ -399,7 +493,7 @@
 
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class=""
+                                <a class="active"
                                    href="/"
                                         >
                                     <i class="fa-regular fa-house fa-fw"></i>
@@ -433,7 +527,7 @@
 
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class="active"
+                                <a class=""
                                    href="/links"
                                         >
                                     <i class="fa-regular fa-link fa-fw"></i>
@@ -474,7 +568,7 @@
 
                     <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
                         
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
                            href="/"
                         >
                             <span>
@@ -514,7 +608,7 @@
 
                     <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
                         
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
                            href="/links"
                         >
                             <span>
@@ -559,85 +653,113 @@
 
 		<div class="main-content-body transition-fade-up">
 			
+			<div class="home-sidebar-container">
+    <div class="sticky-container sticky">
+        
+        
+            
+            <div class="sidebar-content" >
+                <div class="avatar flex justify-center">
+    <img src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2024%2F0602%2Fba5b7469j00seg2na004zd000u000u0m.jpg&thumbnail=660x2147483647&quality=80&type=jpg">
+</div>
+                <div class="author flex flex-col justify-center my-2.5 mx-0">
+    <div class="name">yfor</div>
+    
+</div>
+                <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+            </div>
+        
+
+    </div>
+</div>
+
+			
 
 			<div class="main-content">
-				<div class="page-template-container">
-	
+				<div class="home-content-container">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
 
-	
-	<div class="friends-link-container flex flex-col">
-	<h1 class="text-[3.2rem] mt-1.5 mb-5 font-bold leading-[1]">友链</h1>
-	
-	<div class="mt-2 mb-4">
-		<h2 class="text-2xl font-bold">friends</h2>
-	</div>
-	
-	<ul class="grid grid-cols-2 mb-6 w-full gap-4">
-		
-		<li class="group transform scale-100 transition-transform duration-100 ease-linear active:scale-95">
-			<a target="_blank" rel="noopener" href="https://www.getspwn.xyz/">
-				<div class="content rounded-lg redefine-box-shadow-flat">
-					<div class="thumbnail rounded-t-lg h-32 md:h-44 overflow-hidden">
-						<img class="rounded-t-lg object-cover w-full h-full" src="/images/gets.jpeg" />
-					</div>
-					<div class="avainfo flex flex-row items-center gap-1 sm:gap-2 overflow-hidden min-w-0">
-						<div class="avatar h-16 w-16 rounded-bl-lg bg-third-background-color">
-							
-							<img class="rounded-bl-lg h-16 w-16 max-w-none" src="/images/gets.jpeg" onerror="this.style.display='none'">
-							
-						</div>
-						<div class="flex flex-col min-w-0">
-							<div class="text-lg text-second-text-color ellipsis group-hover:!text-primary">gets</div>
-							<div class="text-third-text-color ellipsis">我滴师傅</div>
-						</div>
-					</div>
-				</div>
-			</a>
-		</li>
-		
-		<li class="group transform scale-100 transition-transform duration-100 ease-linear active:scale-95">
-			<a target="_blank" rel="noopener" href="https://find-key.github.io/">
-				<div class="content rounded-lg redefine-box-shadow-flat">
-					<div class="thumbnail rounded-t-lg h-32 md:h-44 overflow-hidden">
-						<img class="rounded-t-lg object-cover w-full h-full" src="https://find-key.github.io/images/head_image.jpg" />
-					</div>
-					<div class="avainfo flex flex-row items-center gap-1 sm:gap-2 overflow-hidden min-w-0">
-						<div class="avatar h-16 w-16 rounded-bl-lg bg-third-background-color">
-							
-							<img class="rounded-bl-lg h-16 w-16 max-w-none" src="https://find-key.github.io/images/head_image.jpg" onerror="this.style.display='none'">
-							
-						</div>
-						<div class="flex flex-col min-w-0">
-							<div class="text-lg text-second-text-color ellipsis group-hover:!text-primary">findkey</div>
-							<div class="text-third-text-color ellipsis">二进制行者</div>
-						</div>
-					</div>
-				</div>
-			</a>
-		</li>
-		
-	</ul>
-	
-	
-	<div class="clear"></div>
-</div>
-	
+                
 
-	<div class="page-template-content markdown-body">
-		
+                
 
-		
-	</div>
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2025/10/29/2025%E5%BC%BA%E7%BD%91%E6%9D%AF/">
+                            2025强网杯wp
+                        </a>
+                    </h3>
 
-	<div class="page-template-comments">
-		
-	</div>
+                    <div class="home-article-content markdown-body">
+                        
+                            
+                            题目链接：https://github.com/yfor-yfor/-/tree/main/2025%E5%BC%BA%E7%BD%91%E6%9D%AF
+flag-market菜单为退出或付钱
+退出即exit
+付钱如果为0xff，就break，如果不是0xff，就关闭流文件，将标志位变成0
+break后清空s，并且将我们输入的内容作为模式，尝试打开user.log
+最后重新再开始菜单流程
+...
+                        
+                    </div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Wed Oct 29 2025 22:49:14 GMT+0800">
+                
+                    2025-10-29
+                
+            </span>
+        </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fa-solid fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/wp/">wp</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2025/10/29/2025%E5%BC%BA%E7%BD%91%E6%9D%AF/">Read more<span class="seo-reader-text">2025强网杯wp</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-<div class="paginator">
-	
+                </div>
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator px-7 py-5">
+        <div class="paginator">
+	<span class="page-number current">1</span>
 </div>
   
+    </div>
+</div>
+
 			</div>
 
 			
@@ -818,6 +940,7 @@
         containers: ["#swup"],
     });
 </script>
+
 
 
 
